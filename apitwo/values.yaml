@@ -1,0 +1,25 @@
+redis:
+  image: "redis:alpine"
+  port: 6379
+  host: "redis"
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: ""
+
+openresty:
+  image: "openresty/openresty:alpine"
+  port: 80
+  replicaCount: 1
+  dnsResolver: "" # 为空时自动探测
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: false
+    annotations: {}
+    hosts:
+      - host: "api.apitwo.local"
+        paths:
+          - "/"
+    tls: []
+  resources: {} 
